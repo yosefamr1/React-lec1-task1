@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import ProductCard from '../ProductCard/ProductCard';
+import "./ProductList.css";
+import ProductCard from "../ProductCard/ProductCard";
 import { axiosInstance } from "../../network/interceptor";
-
-
-
 
 function ProductList() {
   const [list, setList] = useState([]);
@@ -11,29 +9,23 @@ function ProductList() {
     let res = await axiosInstance.get("/products");
     setList(res?.data?.products);
     console.log(res);
-
-
   };
   useEffect(() => {
     callApi();
-    
   }, []);
-  
+
   console.log(list);
 
-
   return (
-    <>
-
-      <p>hello from productlist</p>
-      {
-      list.length>0? list.map((product)=>(
-      <ProductCard key={product.id} product={product}/>
-        )):""
-  }
-    </>
-
-  )
+    <div className="productlist">
+      
+      {list.length > 0
+        ? list.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))
+        : ""}
+    </div>
+  );
 }
 
 export default ProductList;

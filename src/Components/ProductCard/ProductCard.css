@@ -1,0 +1,31 @@
+.ProductCard{
+    padding: 0.7rem;
+    width: 20rem;
+    background-color: rgb(218, 222, 226);border-radius: 2rem;
+}
+
+
+.description {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tuglle_btns{
+    display: flex;
+    justify-content: center;
+    gap: .625rem;
+}
+.increment_btn{
+    background-color: #3A4980;
+    border-radius: 6rem;
+    padding: .5rem 1rem;
+    color: white;
+}
+.{
+    background-color: #3A4980;
+    border-radius: 3.125rem;
+    
+}
