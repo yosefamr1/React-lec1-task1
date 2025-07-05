@@ -36,7 +36,7 @@ function ProductCard({ product }) {
             </div>
             <div className="product_text">
                 <h4>{product.title}</h4>
-                <div>{renderStars(product.rating)}</div>
+                <div>{renderStars(product.rating)} ({product.rating})</div>
                 <h3>{product.price}$</h3>
 
                 <p className="description">{product.description}</p>

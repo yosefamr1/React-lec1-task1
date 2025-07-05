@@ -1,20 +1,28 @@
 .ProductCard {
     gap: .625rem;
     display: flex;
-    padding: 0.7rem;
     width: 20rem;
-    background-color: rgb(218, 222, 226);
+    background-color: white;
     border-radius: 2rem;
     flex-direction: column;
     align-items: center;
+    border: 1px solid #F7F5F7;
 }
+.product_text{
+        padding: 0.7rem;
 
+}
 .description {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.product_img{
+    width: 100%;
+    background-color: #F7F5F7;
 }
 
 .tuglle_btns {
