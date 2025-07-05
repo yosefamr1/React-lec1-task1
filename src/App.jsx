@@ -10,8 +10,9 @@ function App() {
 
   return (
     <>
-  <Nav/>
-  <ProductList/>
+      <Nav className="nav" />
+      <ProductList className="product-list" />
+
     </>
   )
 }

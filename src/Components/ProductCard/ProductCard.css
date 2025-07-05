@@ -21,7 +21,8 @@
 }
 
 .product_img{
-    width: 100%;
+    border-radius: 2rem 2rem 0 0;
+        width: 100%;
     background-color: #F7F5F7;
 }
 
