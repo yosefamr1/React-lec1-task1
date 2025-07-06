@@ -4,6 +4,9 @@ function Nav() {
   return (
 <div className="nav">
   <p>Nav Bar</p>
+  <div className="buttons">
+    
+  </div>
 </div>
 
   )
