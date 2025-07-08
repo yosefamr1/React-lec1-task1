@@ -1,4 +1,6 @@
 .nav{
+    display: flex;
+    justify-content: space-between;
     width: 100%;
     background-color:#EDEDED ;
     padding: 1.5625rem 5rem;
