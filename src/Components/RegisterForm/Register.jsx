@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./Register.css"; // << هنا نضيف ملف الستايل
 
 export default function Register() {
   const navigate = useNavigate();
@@ -16,26 +17,20 @@ export default function Register() {
   const validate = () => {
     const newErrors = {};
 
-    // Required Fields
     if (!form.username.trim()) newErrors.username = "User Name is required";
     if (!form.email.trim()) newErrors.email = "Email is required";
     if (!form.password) newErrors.password = "Password is required";
     if (!form.confirmPassword) newErrors.confirmPassword = "Confirm Password is required";
-
-    // No spaces in username
     if (/\s/.test(form.username)) newErrors.username = "No spaces allowed in User Name";
 
-    // Email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (form.email && !emailRegex.test(form.email)) newErrors.email = "Invalid email format";
 
-    // Password strength
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{6,}$/;
     if (form.password && !passwordRegex.test(form.password)) {
       newErrors.password = "Password must have at least 1 uppercase letter, 1 number, and 6+ characters";
     }
 
-    // Confirm password
     if (form.password !== form.confirmPassword) {
       newErrors.confirmPassword = "Passwords do not match";
     }
@@ -50,14 +45,12 @@ export default function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
 
-    // Check if email already exists
     const users = JSON.parse(localStorage.getItem("users")) || [];
     const exists = users.some((u) => u.email === form.email);
     if (exists) {
@@ -65,7 +58,6 @@ export default function Register() {
       return;
     }
 
-    // Save new user
     users.push({
       username: form.username,
       email: form.email,
@@ -74,12 +66,11 @@ export default function Register() {
     });
     localStorage.setItem("users", JSON.stringify(users));
     alert("Registration successful!");
-
     navigate("/login");
   };
 
   return (
-    <div style={{ maxWidth: "400px", margin: "50px auto" }}>
+    <div className="register-container">
       <h2>Register</h2>
       <form onSubmit={handleSubmit}>
         <input
@@ -89,7 +80,7 @@ export default function Register() {
           value={form.username}
           onChange={handleChange}
         />
-        {errors.username && <p style={{ color: "red" }}>{errors.username}</p>}
+        {errors.username && <p>{errors.username}</p>}
 
         <input
           type="email"
@@ -98,7 +89,7 @@ export default function Register() {
           value={form.email}
           onChange={handleChange}
         />
-        {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
+        {errors.email && <p>{errors.email}</p>}
 
         <input
           type="password"
@@ -107,7 +98,7 @@ export default function Register() {
           value={form.password}
           onChange={handleChange}
         />
-        {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
+        {errors.password && <p>{errors.password}</p>}
 
         <input
           type="password"
@@ -116,7 +107,7 @@ export default function Register() {
           value={form.confirmPassword}
           onChange={handleChange}
         />
-        {errors.confirmPassword && <p style={{ color: "red" }}>{errors.confirmPassword}</p>}
+        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
 
         <input
           type="text"

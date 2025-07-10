@@ -1,8 +1,18 @@
-.nav{
+.nav {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    background-color:#EDEDED ;
+    background-color: #EDEDED;
     padding: 1.5625rem 5rem;
     color: #0D3356;
+}
+.nav a{
+    text-decoration: none;
+    color: #0D3356;
+    font-weight: 600;
+}
+
+.buttons {
+    gap: 2rem;
+    display: flex;
 }
