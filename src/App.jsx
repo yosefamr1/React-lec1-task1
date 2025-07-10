@@ -5,6 +5,7 @@ import Footer from "./Components/Footer/Footer";
 import Cartlist from "./Components/Cartlist/Cartlist";
 import { Route, Routes } from "react-router-dom";
 import Login from "./Components/LoginForm/login";
+import Register from "./Components/RegisterForm/Register";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <div className="main-content">
           <Routes>
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             <Route path="/cart" element={<Cartlist />} />
             <Route path="/productlist" element={<ProductList />} />
           </Routes>
