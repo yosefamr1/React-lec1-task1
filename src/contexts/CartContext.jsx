@@ -4,6 +4,7 @@ import { CartContext } from "./CartContext";
 
 export function CartProvider({ children }) {
   const [cartItems, setCartItems] = useState([]);
+  
 
   const handleAddToCart = (item) => {
     const exists = cartItems.find((cartItem) => cartItem.id === item.id);
