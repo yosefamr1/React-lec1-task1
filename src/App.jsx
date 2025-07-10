@@ -10,15 +10,17 @@ function App() {
 
   return (
     <>
-      <Nav className="nav" />
-      < Routes >
-        <Route path="/cart" element={<Cartlist />} />
-        <Route path="/productlist" element={<ProductList />} />
-
-      </Routes >
-      {/* <ProductList className="product-list" /> */}
-      <Footer className="footer" />
-
+       <div className="app-container">
+      <Nav />
+      <div className="main-content">
+        <Routes>
+          <Route path="/cart" element={<Cartlist />} />
+          <Route path="/productlist" element={<ProductList />} />
+        </Routes>
+      </div>
+      <Footer />
+    </div>
+  
     </>
   )
 }

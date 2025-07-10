@@ -1,3 +1,18 @@
 .nav{
     margin-bottom: 2rem;
 }
+body, html, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* 100% من ارتفاع الشاشة */
+}
+
+.main-content {
+  flex: 1; /* تاخد المساحة الباقية بين الـ nav والـ footer */
+}
