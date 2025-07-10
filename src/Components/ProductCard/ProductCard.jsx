@@ -1,22 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useContext } from "react";
+import { CartContext } from "../../contexts/CartContext";
 import "./ProductCard.css";
+
 function ProductCard({ product }) {
-  const [counter, setcounter] = useState(1);
-  const [incart, setincart ] = useState(false);                
+  const { handleAddToCart, cartItems } = useContext(CartContext);
+  const existingItem = cartItems.find((item) => item.id === product.id);
+  const counter = existingItem ? existingItem.quantity : 1;
+
+  const isInCart = cartItems.some((item) => item.id === product.id);
 
   const increment = () => {
-    if (counter < product.stock) setcounter(counter + 1);
+    if (counter < product.stock) {
+      handleAddToCart({ ...product, quantity: counter + 1 });
+    }
   };
 
   const decrement = () => {
-  if (counter > 1) {
-    setcounter(counter - 1);
-  } else {
-    setincart(false);
-    setcounter(1);
-  }
-};
+    if (counter > 1) {
+      handleAddToCart({ ...product, quantity: counter - 1 });
+    } else {
+      //to delete
+      handleAddToCart({ ...product, quantity: 0 });
+    }
+  };
 
+  const handleClick = () => {
+    handleAddToCart({ ...product, quantity: counter });
+  };
 
   const renderStars = (rating) => {
     const stars = [];
@@ -61,9 +71,11 @@ function ProductCard({ product }) {
     return stars;
   };
 
-  const handleAddToCart = () => {
-    setincart(true);
-  };
+  useEffect(() => {
+    if (isInCart) {
+      handleAddToCart({ ...product, quantity: counter });
+    }
+  }, [counter]);
 
   return (
     <section className="ProductCard">
@@ -79,18 +91,25 @@ function ProductCard({ product }) {
 
         <p className="description">{product.description}</p>
       </div>
-     {incart?<div className="buttons">
-                <div className="tuglle_btns">
-                    <button className="increment_btn" onClick={increment}>+</button>
-                    <h2>{counter}</h2>
-                    <button className="increment_btn" onClick={decrement}>-</button>
-                </div>
-            </div>:
-      <div className="cart_btn">
-        <button className="add_btn" onClick={handleAddToCart}>
-          add to cart
-        </button>
-      </div>}
+      {isInCart ? (
+        <div className="buttons">
+          <div className="tuglle_btns">
+            <button className="increment_btn" onClick={increment}>
+              +
+            </button>
+            <h2>{counter}</h2>
+            <button className="increment_btn" onClick={decrement}>
+              -
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div className="cart_btn">
+          <button className="add_btn" onClick={handleClick}>
+            add to cart
+          </button>
+        </div>
+      )}
     </section>
   );
 }
