@@ -1,17 +1,22 @@
 import React from "react";
 import "./Nav.css";
-import { NavLink, useNavigate  } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { CartContext } from "../../contexts/CartContext";
+import { useContext } from "react";
 
 function Nav() {
-    const navigate = useNavigate();
-   const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
+  const navigate = useNavigate();
+  const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
 
   const handleSignOut = () => {
     localStorage.removeItem("loggedUser");
     navigate("/login");
   };
+
+  const { cartItems } = useContext(CartContext);
+  const totalCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
   return (
-     <div className="nav">
+    <div className="nav">
       <NavLink
         to="/productlist"
         className={({ isActive }) => (isActive ? "active" : "")}
@@ -25,6 +30,7 @@ function Nav() {
           className={({ isActive }) => (isActive ? "active" : "")}
         >
           Cart
+          {totalCount > 0 && <span className="cart-count">{totalCount}</span>}
         </NavLink>
 
         {!loggedUser ? (
