@@ -4,7 +4,7 @@ import Nav from "./Components/Nav/Nav";
 import Footer from "./Components/Footer/Footer";
 import Cartlist from "./Components/Cartlist/Cartlist";
 import { Route, Routes } from "react-router-dom";
-import  Login  from "./Components/LoginForm/Login";
+import Login from "./Components/LoginForm/Login";
 import Register from "./Components/RegisterForm/Register";
 import ProductDetails from "./Components/ProductDetails/ProductDetails";
 import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
@@ -19,12 +19,13 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/productlist" element={<ProductList />} />
+            <Route path="" element={<ProductList />} />
             <Route path="/productdetails/:id" element={<ProductDetails />} />
             <Route path="/cart" element={
-                <PrivateRoute>
-                 <Cartlist />
-                </PrivateRoute>
-              }
+              <PrivateRoute>
+                <Cartlist />
+              </PrivateRoute>
+            }
             />
           </Routes>
         </div>
