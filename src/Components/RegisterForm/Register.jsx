@@ -1,120 +1,90 @@
-import React, { useState } from "react";
+import React from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import "./Register.css"; // << هنا نضيف ملف الستايل
+import "./Register.css";
 
 export default function Register() {
   const navigate = useNavigate();
-  const [form, setForm] = useState({
-    username: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    address: "",
-  });
 
-  const [errors, setErrors] = useState({});
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
 
-  const validate = () => {
-    const newErrors = {};
-
-    if (!form.username.trim()) newErrors.username = "User Name is required";
-    if (!form.email.trim()) newErrors.email = "Email is required";
-    if (!form.password) newErrors.password = "Password is required";
-    if (!form.confirmPassword) newErrors.confirmPassword = "Confirm Password is required";
-    if (/\s/.test(form.username)) newErrors.username = "No spaces allowed in User Name";
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (form.email && !emailRegex.test(form.email)) newErrors.email = "Invalid email format";
-
-    const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{6,}$/;
-    if (form.password && !passwordRegex.test(form.password)) {
-      newErrors.password = "Password must have at least 1 uppercase letter, 1 number, and 6+ characters";
-    }
-
-    if (form.password !== form.confirmPassword) {
-      newErrors.confirmPassword = "Passwords do not match";
-    }
-
-    return newErrors;
-  };
-
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-    setErrors({ ...errors, [e.target.name]: "" });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const validationErrors = validate();
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      return;
-    }
-
+  const onSubmit = (data) => {
     const users = JSON.parse(localStorage.getItem("users")) || [];
-    const exists = users.some((u) => u.email === form.email);
+    const exists = users.some((u) => u.email === data.email);
+    
     if (exists) {
-      setErrors({ email: "Email already registered" });
+      alert("Email already registered");
       return;
     }
 
-    users.push({
-      username: form.username,
-      email: form.email,
-      password: form.password,
-      address: form.address,
-    });
+    users.push(data);
     localStorage.setItem("users", JSON.stringify(users));
     alert("Registration successful!");
     navigate("/login");
   };
 
+  const password = watch("password");
+
   return (
     <div className="register-container">
       <h2>Register</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <input
           type="text"
-          name="username"
-          placeholder="User Name"
-          value={form.username}
-          onChange={handleChange}
+          placeholder="UserName"
+          {...register("username", {
+            required: "User Name is required",
+            validate: (value) => !/\s/.test(value) || "No spaces allowed",
+          })}
         />
-        {errors.username && <p>{errors.username}</p>}
+        {errors.username && <p>{errors.username.message}</p>}
 
         <input
           type="email"
-          name="email"
           placeholder="Email"
-          value={form.email}
-          onChange={handleChange}
+          {...register("email", {
+            required: "Email is required",
+            pattern: {
+              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+              message: "Invalid email format",
+            },
+          })}
         />
-        {errors.email && <p>{errors.email}</p>}
+        {errors.email && <p>{errors.email.message}</p>}
 
         <input
           type="password"
-          name="password"
           placeholder="Password"
-          value={form.password}
-          onChange={handleChange}
+          {...register("password", {
+            required: "Password is required",
+            pattern: {
+              value: /^(?=.*[A-Z])(?=.*\d).{6,}$/,
+              message: "Must have 1 uppercase, 1 number, and 6+ chars",
+            },
+          })}
         />
-        {errors.password && <p>{errors.password}</p>}
+        {errors.password && <p>{errors.password.message}</p>}
 
         <input
           type="password"
-          name="confirmPassword"
           placeholder="Confirm Password"
-          value={form.confirmPassword}
-          onChange={handleChange}
+          {...register("confirmPassword", {
+            required: "Confirm Password is required",
+            validate: (value) =>
+              value === password || "Passwords do not match",
+          })}
         />
-        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+        {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
 
         <input
           type="text"
-          name="address"
           placeholder="Address (optional)"
-          value={form.address}
-          onChange={handleChange}
+          {...register("address")}
         />
 
         <button type="submit">Register</button>

@@ -21,11 +21,15 @@ function ProductList() {
   //   setcartitems([...cartitems, item]);
   // };
 
+  // const details = (productid) => {
+  //   console.log("Product ID:", productid);
+  //   // Navigate to product details page or perform any action
+  // }
   return (
     <div className="productlist">
       {list.length > 0
         ? list.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard   key={product.id} product={product} />
           ))
         : ""}
     </div>
