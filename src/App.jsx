@@ -7,6 +7,7 @@ import { Route, Routes } from "react-router-dom";
 import Login from "./Components/LoginForm/login";
 import Register from "./Components/RegisterForm/Register";
 import ProductDetails from "./Components/ProductDetails/ProductDetails";
+import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
 
 function App() {
   return (
@@ -17,10 +18,14 @@ function App() {
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/cart" element={<Cartlist />} />
             <Route path="/productlist" element={<ProductList />} />
             <Route path="/productdetails/:id" element={<ProductDetails />} />
-
+            <Route path="/cart" element={
+                <PrivateRoute>
+                 <Cartlist />
+                </PrivateRoute>
+              }
+            />
           </Routes>
         </div>
         <Footer />
