@@ -1,10 +1,9 @@
 import { Navigate } from "react-router-dom";
 
 function PrivateRoute({ children }) {
-  const userData = JSON.parse(localStorage.getItem("userData"));
-  const isLoggedIn = userData?.isLoggedIn;
-  console.log(isLoggedIn);
-  if (!isLoggedIn) {
+  const userData = JSON.parse(localStorage.getItem("loggedUser"));
+
+  if (!userData) {
     return <Navigate to="/login" replace />;
   }
 
