@@ -1,0 +1,82 @@
+.details {
+  margin-top: 2.5rem;
+  color: rgb(187, 185, 185);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.details .container {
+    margin: auto;
+    padding: 2rem;
+    background-color: rgb(225, 225, 225);
+    display: flex
+;
+    flex-direction: row;
+    justify-content: space-between;
+    border: none;
+    border-radius: 2rem;
+}
+
+.details .container figure {
+  width: 50%;
+  /* margin-right: 5rem; */
+}
+#title {
+  color: black;
+  font-size: 3rem;
+}
+
+#price {
+  width: fit-content;
+  color: #00ff2d;
+  border: none;
+  border-radius: 2rem;
+  background-color: rgb(0 0 0);
+  padding: 0.5rem;
+}
+.instock {
+  border: none;
+  border-radius: 2rem;
+  padding: 0.5rem;
+  width: fit-content;
+  color: white;
+  background-color: #008318;
+}
+.outstock {
+  border: none;
+  border-radius: 2rem;
+  padding: 10px;
+  width: fit-content;
+  color: white;
+  background-color: #830900;
+}
+.brand,
+.category {
+  color: black;
+  font-size: larger;
+  font-weight: bold;
+}
+.text {
+  width: 50%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+.addtocart-btn{
+    color: wheat;
+    background-color: #1e1e1e;
+    padding: 0.5rem;
+    border-radius: 1rem;
+}
+
+button:hover{
+    cursor: pointer;
+    letter-spacing: 3px;
+}
+a:hover{
+    cursor: pointer;
+    letter-spacing: 3px;
+}

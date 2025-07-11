@@ -2,8 +2,12 @@ import React, { useEffect, useState } from "react";
 import "./ProductList.css";
 import ProductCard from "../ProductCard/ProductCard";
 import { axiosInstance } from "../../network/interceptor";
+import { useNavigate } from "react-router-dom";
+
 
 function ProductList() {
+  const navigate = useNavigate();
+
   const [list, setList] = useState([]);
 
   const callApi = async () => {
@@ -16,20 +20,23 @@ function ProductList() {
     callApi();
   }, []);
 
-  // console.log(list);
-  //   const handleAddToCart = (item) => {
-  //   setcartitems([...cartitems, item]);
-  // };
 
-  // const details = (productid) => {
-  //   console.log("Product ID:", productid);
-  //   // Navigate to product details page or perform any action
-  // }
+  const details = (productid) => {
+    // console.log("Product ID:", productid);
+
+    navigate(`/productdetails/${productid}`);
+
+    
+  };
   return (
     <div className="productlist">
       {list.length > 0
         ? list.map((product) => (
-            <ProductCard   key={product.id} product={product} />
+            <ProductCard
+              key={product.id}
+              product={product}
+              onClick={() => details(product.id)}
+            />
           ))
         : ""}
     </div>

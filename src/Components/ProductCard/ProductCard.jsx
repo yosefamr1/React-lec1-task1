@@ -2,20 +2,22 @@ import React, { useEffect, useContext } from "react";
 import { CartContext } from "../../contexts/CartContext";
 import "./ProductCard.css";
 
-function ProductCard({ product }) {
+function ProductCard({ product, onClick }) {
   const { handleAddToCart, cartItems } = useContext(CartContext);
   const existingItem = cartItems.find((item) => item.id === product.id);
   const counter = existingItem ? existingItem.quantity : 1;
 
   const isInCart = cartItems.some((item) => item.id === product.id);
 
-  const increment = () => {
+  const increment = (e) => {
+     e.stopPropagation();
     if (counter < product.stock) {
       handleAddToCart({ ...product, quantity: counter + 1 });
     }
   };
 
-  const decrement = () => {
+  const decrement = (e) => {
+     e.stopPropagation();
     if (counter > 1) {
       handleAddToCart({ ...product, quantity: counter - 1 });
     } else {
@@ -24,7 +26,8 @@ function ProductCard({ product }) {
     }
   };
 
-  const handleClick = () => {
+  const handleClick = (e) => {
+     e.stopPropagation();
     handleAddToCart({ ...product, quantity: counter });
   };
 
@@ -78,7 +81,7 @@ function ProductCard({ product }) {
   }, [counter]);
 
   return (
-    <section className="ProductCard">
+    <section className="ProductCard" onClick={onClick}>
       <div className="product_img">
         <img src={product.thumbnail} alt="" />
       </div>
