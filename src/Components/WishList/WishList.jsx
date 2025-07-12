@@ -5,7 +5,7 @@ function Wishlist() {
   const wishlistItems = useSelector((state) => state.counter.wishItem);
 
   return (
-    <section className="cart"> 
+    <section className="cart">
       <div className="container">
         <div className="header">Wishlist</div>
 
@@ -17,15 +17,11 @@ function Wishlist() {
               <div className="item" key={product.id}>
                 <div className="item_description">
                   <div className="item-img">
-                    <img
-                      src={product.thumbnail}
-                      alt={product.title}
-                    />
-
+                    <img src={product.thumbnail} alt={product.title} />
                   </div>
                   <div className="item-text">
                     <p>{product.title}</p>
-                    <p>Movie ID: {product.id}</p>
+                    <p>Product ID: {product.id}</p>
                   </div>
                 </div>
               </div>

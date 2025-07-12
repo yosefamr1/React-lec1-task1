@@ -2,7 +2,8 @@ import React, { useEffect, useContext } from "react";
 import { CartContext } from "../../contexts/CartContext";
 import "./ProductCard.css";
 import { useDispatch } from "react-redux";
-import { addtowishlist } from "../../store/wishlistSlice";
+import { useSelector } from "react-redux";
+import { addtowishlist, removeFromwishlist } from "../../store/wishlistSlice";
 
 function ProductCard({ product, onClick }) {
   const dispatch = useDispatch();
@@ -14,14 +15,14 @@ function ProductCard({ product, onClick }) {
   const isInCart = cartItems.some((item) => item.id === product.id);
 
   const increment = (e) => {
-     e.stopPropagation();
+    e.stopPropagation();
     if (counter < product.stock) {
       handleAddToCart({ ...product, quantity: counter + 1 });
     }
   };
 
   const decrement = (e) => {
-     e.stopPropagation();
+    e.stopPropagation();
     if (counter > 1) {
       handleAddToCart({ ...product, quantity: counter - 1 });
     } else {
@@ -31,7 +32,7 @@ function ProductCard({ product, onClick }) {
   };
 
   const handleClick = (e) => {
-     e.stopPropagation();
+    e.stopPropagation();
     handleAddToCart({ ...product, quantity: counter });
   };
 
@@ -84,14 +85,22 @@ function ProductCard({ product, onClick }) {
     }
   }, [counter]);
 
+  // Wishlist functionality
+  const wishItem = useSelector((state) => state.counter.wishItem);
 
-    const handleaddtowish = (e) => {
-     e.stopPropagation();
-     console.log("add to wish clicked");
-     dispatch(addtowishlist(product));
-     
-    
+  const isInWishlist = wishItem.some((item) => item.id === product.id);
+
+  const handleToggleWishlist = (e) => {
+    e.stopPropagation();
+    if (isInWishlist) {
+      dispatch(removeFromwishlist(product.id));
+      console.log("Removed from wishlist");
+    } else {
+      dispatch(addtowishlist(product));
+      console.log("Added to wishlist");
+    }
   };
+
   return (
     <section className="ProductCard" onClick={onClick}>
       <div className="product_img">
@@ -123,10 +132,11 @@ function ProductCard({ product, onClick }) {
           <button className="add_btn" onClick={handleClick}>
             add to cart
           </button>
+          <button onClick={handleToggleWishlist}>
+            {isInWishlist ? "Remove from Wishlist" : "Add to Wishlist"}
+          </button>
         </div>
       )}
-
-      <button  onClick={handleaddtowish}>add to wishlist</button>
     </section>
   );
 }
