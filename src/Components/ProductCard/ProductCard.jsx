@@ -1,8 +1,12 @@
 import React, { useEffect, useContext } from "react";
 import { CartContext } from "../../contexts/CartContext";
 import "./ProductCard.css";
+import { useDispatch } from "react-redux";
+import { addtowishlist } from "../../store/wishlistSlice";
 
 function ProductCard({ product, onClick }) {
+  const dispatch = useDispatch();
+
   const { handleAddToCart, cartItems } = useContext(CartContext);
   const existingItem = cartItems.find((item) => item.id === product.id);
   const counter = existingItem ? existingItem.quantity : 1;
@@ -80,6 +84,14 @@ function ProductCard({ product, onClick }) {
     }
   }, [counter]);
 
+
+    const handleaddtowish = (e) => {
+     e.stopPropagation();
+     console.log("add to wish clicked");
+     dispatch(addtowishlist(product));
+     
+    
+  };
   return (
     <section className="ProductCard" onClick={onClick}>
       <div className="product_img">
@@ -113,6 +125,8 @@ function ProductCard({ product, onClick }) {
           </button>
         </div>
       )}
+
+      <button  onClick={handleaddtowish}>add to wishlist</button>
     </section>
   );
 }

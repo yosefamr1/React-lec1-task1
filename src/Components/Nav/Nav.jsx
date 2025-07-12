@@ -32,6 +32,12 @@ function Nav() {
           Cart
           {totalCount > 0 && <span className="cart-count">{totalCount}</span>}
         </NavLink>
+          <NavLink
+          to="/wishlist"
+          className={({ isActive }) => (isActive ? "active" : "")}
+        >
+          Wish List
+        </NavLink>
 
         {!loggedUser ? (
           <>
