@@ -46,3 +46,8 @@
     padding: .5rem 6.125rem;
 
 }
+.wish-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}

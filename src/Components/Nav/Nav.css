@@ -6,7 +6,8 @@
     padding: 1.5625rem 5rem;
     color: #0D3356;
 }
-.nav a{
+
+.nav a {
     text-decoration: none;
     color: #0D3356;
     font-weight: 600;
@@ -16,15 +17,24 @@
     gap: 2rem;
     display: flex;
 }
+
 .cart-count {
-  background-color: #3A4980;
-  color: white;
-  border-radius: 50%;
-  padding: 2px 8px;
-  font-size: 12px;
-  margin-left: 5px;
-  font-weight: bold;
-  display: inline-block;
-  min-width: 20px;
-  text-align: center;
+    background-color: #3A4980;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 8px;
+    font-size: 12px;
+    margin-left: 5px;
+    font-weight: bold;
+    display: inline-block;
+    min-width: 20px;
+    text-align: center;
+}
+
+.signout-btn {
+    color: #0D3356;
+    font-weight: 600;
+    border-radius: 2rem;
+    padding: 2px;
+    border: 0.5px solid #0D3356;
 }

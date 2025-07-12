@@ -4,6 +4,10 @@ import "./ProductCard.css";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { addtowishlist, removeFromwishlist } from "../../store/wishlistSlice";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
+import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
+
 
 function ProductCard({ product, onClick }) {
   const dispatch = useDispatch();
@@ -132,11 +136,15 @@ function ProductCard({ product, onClick }) {
           <button className="add_btn" onClick={handleClick}>
             add to cart
           </button>
-          <button onClick={handleToggleWishlist}>
-            {isInWishlist ? "Remove from Wishlist" : "Add to Wishlist"}
-          </button>
+
         </div>
       )}
+          <button className="wish-btn" onClick={handleToggleWishlist}>
+            <FontAwesomeIcon
+              icon={isInWishlist ? solidHeart : regularHeart}
+              style={{ color: isInWishlist ? "#3A4980" : "gray", fontSize: "1.5rem" ,border: "none", backgroundColor: "transparent"}}
+            />
+          </button>
     </section>
   );
 }
