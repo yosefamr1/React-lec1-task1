@@ -9,6 +9,7 @@ import Register from "./Components/RegisterForm/Register";
 import ProductDetails from "./Components/ProductDetails/ProductDetails";
 import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
 import Wishlist from "./Components/WishList/wishlist";
+import Fullback from "./Components/fullback/fullback";
 
 
 function App() {
@@ -22,6 +23,8 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/productlist" element={<ProductList />} />
             <Route path="/wishlist" element={<Wishlist />} />
+            <Route path="*" element={<Fullback />} />
+
 
             <Route path="" element={<ProductList />} />
             <Route path="/productdetails/:id" element={<ProductDetails />} />
