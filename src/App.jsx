@@ -9,7 +9,7 @@ import Register from "./Components/RegisterForm/Register";
 import ProductDetails from "./Components/ProductDetails/ProductDetails";
 import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
 import Wishlist from "./Components/WishList/WishList";
-import Fullback from "./Components/fullback/fullback";
+import Fullback from "./Components/fullback/Fullback";
 
 
 function App() {
