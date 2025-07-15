@@ -8,7 +8,7 @@ import Login from "./Components/LoginForm/Login";
 import Register from "./Components/RegisterForm/Register";
 import ProductDetails from "./Components/ProductDetails/ProductDetails";
 import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
-import Wishlist from "./Components/WishList/wishlist";
+import Wishlist from "./Components/WishList/WishList";
 import Fullback from "./Components/fullback/fullback";
 
 
